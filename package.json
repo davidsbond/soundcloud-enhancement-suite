@@ -1,0 +1,23 @@
+{
+  "name": "soundcloud-repost-remover",
+  "version": "1.0.0",
+  "description": "Chrome Extension to remove reposted items from your SoundCloud stream",
+  "main": "src/index.js",
+  "repository": "github.com/davidsbond/soundcloud-enhancement-suite",
+  "author": "David Bond <davidsbond93@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "NODE_ENV=development yarn webpack",
+    "prod": "NODE_ENV=production yarn webpack",
+    "lint": "yarn eslint --fix ."
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
+}

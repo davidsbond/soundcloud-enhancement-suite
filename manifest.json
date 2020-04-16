@@ -1,0 +1,14 @@
+{
+  "name": "Soundcloud Enhancement Suite",
+  "version": "1.0",
+  "description": "Chrome Extension to improve your quality of life on SoundCloud",
+  "manifest_version": 2,
+  "content_scripts": [{
+    "js": ["index.js"],
+    "matches": ["https://soundcloud.com/*"]
+  }],
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
