@@ -10,12 +10,33 @@ export const MutationObserver =
  * @param {Function} cb
  */
 export function onPath(expected, cb) {
-  let actual = window.location.pathname;
-  if (actual.endsWith('/')) {
-    actual = actual.slice(0, -1);
-  }
+  let lastPath = '';
 
-  if (expected === actual) {
-    cb();
+  const observer = new MutationObserver(() => {
+    let actual = window.location.pathname;
+    if (actual.endsWith('/')) {
+      actual = actual.slice(0, -1);
+    }
+
+    if (expected === '*' || expected === actual && actual !== lastPath) {
+      cb();
+    }
+
+    lastPath = actual;
+  });
+
+  const body = document.querySelector('body');
+  const config = {childList: true, subtree: true};
+  observer.observe(body, config);
+}
+
+/**
+ * Redirects the user to the given URI
+ * @param {String} uri
+ */
+export function redirect(uri) {
+  if (window.location.pathname !== uri) {
+    window.stop();
+    window.location.pathname = uri;
   }
 }
