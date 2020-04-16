@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "SoundCloud Enhancement Suite (SES) is a chrome extension that brings some quality of life improvements when browsing SoundCloud",
   "main": "src/index.js",
-  "repository": "github.com/davidsbond/soundcloud-enhancement-suite",
+  "repository": "https://github.com/davidsbond/soundcloud-enhancement-suite",
   "author": "David Bond <davidsbond93@gmail.com>",
   "license": "MIT",
   "private": false,
