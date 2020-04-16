@@ -7,4 +7,5 @@ SoundCloud
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## Features:
-* Removes reposted content from your [stream](https://soundcloud.com/stream/)
+* Removes reposted content from your stream
+* Hides the "discover" page, browsing to it redirects to the stream page.
