@@ -5,6 +5,7 @@ SoundCloud
 
 ![CI](https://github.com/davidsbond/soundcloud-enhancement-suite/workflows/CI/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/gflolmeahbkikpgmjifobdfopjjodehh.svg?label=Chrome%20Web%20Store)](https://chrome.google.com/webstore/detail/soundcloud-enhancement-su/gflolmeahbkikpgmjifobdfopjjodehh)
 
 ## Features:
 * Removes reposted content from your stream
