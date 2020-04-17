@@ -2,11 +2,15 @@
   "name": "SoundCloud Enhancement Suite",
   "manifest_version": 2,
   "content_scripts": [{
-    "js": ["index.js"],
-    "matches": ["https://soundcloud.com/*"]
+    "js": ["js/index.js"],
+    "matches": ["https://soundcloud.com/*"],
+    "css": ["css/styles.css"]
   }],
   "icons": {
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
-  }
+  },
+  "web_accessible_resources": [
+    "audio/reload.wav"
+  ]
 }

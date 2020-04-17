@@ -1,0 +1,14 @@
+:root {
+    --soundcloud-orange: #FF7700
+}
+
+.play-control {
+    border: 0;
+    text-shadow: none;
+    background-color: transparent;
+    text-transform: uppercase;
+}
+
+.play-control:hover {
+    color: var(--soundcloud-orange)
+}
