@@ -1,10 +1,5 @@
-import {
-  MutationObserver,
-} from '../util/util';
-
-const CLASS_REPOST = '.soundContext__repost';
-const CLASS_LIST_ITEM = '.soundList__item';
-const CLASS_STREAM_LIST = '.stream__list';
+import {ActivityFeed} from '../common/common.js';
+import {Log} from '../log/log.js';
 
 /**
  * Locates all elements in the document with a class matching CLASS_REPOST.
@@ -14,30 +9,27 @@ const CLASS_STREAM_LIST = '.stream__list';
  * CLASS_STREAM_LIST.
  */
 export function removeReposts() {
-  const list = document.querySelector(CLASS_STREAM_LIST);
-  if (!list) {
-    return;
-  }
+  new ActivityFeed({
+    onFound() {
+      Log.info('Repost removing enabled');
+    },
+    onChange(elem) {
+      const repostSelector = '.soundContext__repost';
+      const listItemSelector = '.soundList__item';
+      const reposts = elem.querySelectorAll(repostSelector);
 
-  const mutationObserver = new MutationObserver(() => {
-    const reposts = document.querySelectorAll(CLASS_REPOST);
+      if (!reposts || !reposts.length) {
+        return;
+      }
 
-    if (!reposts) {
-      return;
-    }
+      reposts.forEach((rp) => {
+        const item = rp.closest(listItemSelector);
 
-    reposts.forEach((rp) => {
-      const item = rp.closest(CLASS_LIST_ITEM);
+        item.parentNode.removeChild(item);
+      });
 
-      item.parentNode.removeChild(item);
-    });
+      Log.info(`Removed ${reposts.length} reposted items`);
+    },
   });
-
-  const options = {
-    childList: true,
-    subtree: true,
-  };
-
-  mutationObserver.observe(list, options);
 }
 
