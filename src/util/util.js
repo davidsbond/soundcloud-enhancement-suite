@@ -18,16 +18,21 @@ export function onPath(expected, cb) {
       actual = actual.slice(0, -1);
     }
 
-    if (expected === '*' || expected === actual && actual !== lastPath) {
+    // If the path has actually changed and matches the expected path, invoke
+    // the callback.
+    if (actual !== lastPath && (expected === '*' || expected === actual)) {
       cb();
     }
 
     lastPath = actual;
   });
 
-  const body = document.querySelector('body');
+  // Elements within <head> change when we switch path. This was
+  // chosen to minimise the amount of times we'll invoke the
+  // MutationObserver.
+  const head = document.querySelector('head');
   const config = {childList: true, subtree: true};
-  observer.observe(body, config);
+  observer.observe(head, config);
 }
 
 /**
