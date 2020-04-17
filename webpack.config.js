@@ -8,11 +8,13 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js',
+    filename: 'js/index.js',
   },
   plugins: [
     new CleanWebpackPlugin(),
     new CopyPlugin([
+      {from: 'css', to: 'css'},
+      {from: 'audio', to: 'audio'},
       {
         from: 'manifest.json',
         to: 'manifest.json',

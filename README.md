@@ -9,3 +9,4 @@ SoundCloud
 ## Features:
 * Removes reposted content from your stream
 * Hides the "discover" page, browsing to it redirects to the stream page.
+* Adds a "RELOAD" button for pullups to the audio player

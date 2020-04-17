@@ -24,15 +24,19 @@ class ElementWatcher {
     // Watch for changes to the body element. When we can locate the stream
     // list element within the body stop this observer
     const finder = new MutationObserver(() => {
-      const list = body.querySelector(selector);
-      if (!list) {
+      const elem = body.querySelector(selector);
+      if (!elem) {
         return;
       }
 
-      const elem = list;
+      this.elem = elem;
       finder.disconnect();
       if (this.onFound) {
-        this.onFound(elem);
+        this.onFound(this.elem);
+      }
+
+      if (!this.onChange) {
+        return;
       }
 
       // Once we've found the activity feed, set up a new observer
@@ -40,14 +44,22 @@ class ElementWatcher {
       // change.
       const elemWatcher = new MutationObserver(() => {
         if (this.onChange) {
-          this.onChange(elem);
+          this.onChange(this.elem);
         }
       });
 
-      elemWatcher.observe(list, options);
+      elemWatcher.observe(this.elem, options);
     });
 
     finder.observe(body, options);
+  }
+
+  /**
+   * Returns the element being watched
+   * @return {Element}
+   */
+  node() {
+    return this.elem;
   }
 }
 
@@ -78,6 +90,70 @@ export class PageHeader extends ElementWatcher {
   constructor(callbacks) {
     const selector = '.header__left';
     super(selector, callbacks);
+  }
+}
+
+/**
+ * The PlayerControl class represents the audio player at the bottom
+ * of the SoundCloud page
+ */
+export class PlayerControl extends ElementWatcher {
+  /**
+   * Initialises a new instance of the PlayerControl class
+   * @param {*} callbacks
+   */
+  constructor(callbacks) {
+    const selector = '.playControls';
+    super(selector, callbacks);
+  }
+
+  /**
+   * Starts or stops the audio
+   */
+  toggle() {
+    const elem = this.node();
+    const selector = '.playControls__play';
+    const btn = elem.querySelector(selector);
+
+    btn.click();
+  }
+
+  /**
+   * Clicks the previous button
+   */
+  previous() {
+    const elem = this.node();
+    const selector = '.skipControl__previous';
+    const btn = elem.querySelector(selector);
+
+    btn.click();
+  }
+
+  /**
+   * Returns whether or not audio is currently playing
+   * @return {Boolean}
+   */
+  isPlaying() {
+    const elem = this.node();
+    const selector = '.playControls__play.playing';
+    const btn = elem.querySelector(selector);
+
+    return btn !== null && btn !== undefined;
+  }
+
+  /**
+   * Returns the current volume of the player
+   * @return {Number}
+   */
+  volume() {
+    const elem = this.node();
+    const selector = '.volume__sliderWrapper';
+    const div = elem.querySelector(selector);
+
+    const attrib = 'aria-valuenow';
+    const val = div.getAttribute(attrib);
+
+    return Number(val);
   }
 }
 

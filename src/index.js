@@ -1,6 +1,7 @@
 import {removeReposts} from './stream/stream.js';
 import {hideDiscoverLinks} from './header/header.js';
 import {onPath, redirect} from './util/util.js';
+import {addReloadButton} from './player/player.js';
 import {Log} from './log/log.js';
 
 // Paths
@@ -16,3 +17,6 @@ onPath(PATH_STREAM, removeReposts);
 onPath(PATH_HOME, () => redirect(PATH_STREAM));
 onPath(PATH_DISCOVER, () => redirect(PATH_STREAM));
 onPath(PATH_ANY, hideDiscoverLinks);
+
+// Add additional elements
+addReloadButton();
