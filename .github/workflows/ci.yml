@@ -7,7 +7,7 @@ jobs:
   # not committed
   lint:
     runs-on: ubuntu-latest
-    container: "node:10.15"
+    container: "node:latest"
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -21,7 +21,7 @@ jobs:
   # Job that builds and bundles the extension, changes mode based on git branch
   build:
     runs-on: ubuntu-latest
-    container: "node:10.15"
+    container: "node:latest"
     steps:
       - name: Checkout
         uses: actions/checkout@v1
