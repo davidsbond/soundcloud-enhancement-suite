@@ -20,39 +20,41 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new CopyPlugin([
-      {from: 'css', to: 'css'},
-      {from: 'audio', to: 'audio'},
-      {
-        from: 'manifest.json',
-        to: 'manifest.json',
-        transform(content) {
-          // Copy name, description & version from the package.json
-          // file and put it in the chrome extension manifest.
-          const manifest = JSON.parse(content.toString());
-          const pkgPath = path.resolve(__dirname, 'package.json');
-          const pkg = JSON.parse(fs.readFileSync(pkgPath).toString());
+    new CopyPlugin({
+      patterns: [
+        {from: 'css', to: 'css'},
+        {from: 'audio', to: 'audio'},
+        {
+          from: 'manifest.json',
+          to: 'manifest.json',
+          transform(content) {
+            // Copy name, description & version from the package.json
+            // file and put it in the chrome extension manifest.
+            const manifest = JSON.parse(content.toString());
+            const pkgPath = path.resolve(__dirname, 'package.json');
+            const pkg = JSON.parse(fs.readFileSync(pkgPath).toString());
 
-          // Automatically inject audio files into "web_accessible_resources"
-          // section of manifest
-          const resources = [];
-          const audioPath ='audio';
-          fs.readdirSync(path.resolve(__dirname, audioPath))
-              .forEach((file) => {
-                resources.push(path.join(audioPath, file));
-              });
+            // Automatically inject audio files into "web_accessible_resources"
+            // section of manifest
+            const resources = [];
+            const audioPath ='audio';
+            fs.readdirSync(path.resolve(__dirname, audioPath))
+                .forEach((file) => {
+                  resources.push(path.join(audioPath, file));
+                });
 
-          manifest['version'] = pkg['version'];
-          manifest['author'] = pkg['author'];
-          manifest['homepage_url'] = pkg['repository'];
-          manifest['description'] = pkg['description'];
-          manifest['web_accessible_resources'] = resources;
+            manifest['version'] = pkg['version'];
+            manifest['author'] = pkg['author'];
+            manifest['homepage_url'] = pkg['repository'];
+            manifest['description'] = pkg['description'];
+            manifest['web_accessible_resources'] = resources;
 
-          const data = JSON.stringify(manifest, null, 2);
-          return Buffer.from(data);
+            const data = JSON.stringify(manifest, null, 2);
+            return Buffer.from(data);
+          },
         },
-      },
-      {from: 'icons', to: 'icons'},
-    ]),
+        {from: 'icons', to: 'icons'},
+      ],
+    }),
   ],
 };
