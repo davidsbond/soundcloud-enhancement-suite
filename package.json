@@ -15,7 +15,7 @@
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^7.0.0",
-    "eslint": "^7.20.0",
+    "eslint": "^7.21.0",
     "eslint-config-google": "^0.14.0",
     "webpack": "^5.24.2",
     "webpack-cli": "^4.3.0"
